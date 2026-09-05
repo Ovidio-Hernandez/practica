@@ -64,6 +64,11 @@ class Reserva(BaseModel):
     fecha_fin: date
     huespedes: int = Field(ge=1, le=10)
 
+    @property
+    def noches(self) -> int:
+        cant_noches = (self.fecha_fin - self.fecha_inicio).days
+        return cant_noches
+
     @model_validator(mode="after")
     def validar_fecha(self) -> Self:
         if self.fecha_inicio >= self.fecha_fin:

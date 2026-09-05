@@ -86,3 +86,8 @@ def test_reserva_valida():
 def test_reserva_invalida():
     with pytest.raises(ValidationError):
         Reserva(fecha_inicio="2026-12-31", fecha_fin="2026-11-30", huespedes="5")
+
+
+def test_noches_validas():
+    r = Reserva(fecha_inicio="2026-09-01", fecha_fin="2026-09-08", huespedes="10")
+    assert r.noches == 7
